@@ -1,0 +1,68 @@
+# Ignore everything by default
+*
+
+# But not these files:
+!.gitignore
+
+# Allow CSV files
+!*.csv
+
+# Allow Jupyter notebooks
+!*.ipynb
+
+# Allow Python files
+!*.py
+
+# Allow directories (so we can traverse into them)
+!*/
+
+# Ignore common large files even if they match above patterns
+*.pkl
+*.npy
+*.db
+*.xml
+*.h5
+*.hdf5
+
+# Ignore model checkpoints and weights
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+
+# Ignore image outputs
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Ignore compressed files
+*.zip
+*.tar
+*.gz
+*.rar
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Ignore environment files
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
