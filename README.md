@@ -2,6 +2,29 @@
 
 A novel machine learning system that learns **pharmacology-aligned embeddings** by integrating chemical structures (SMILES), protein sequences (ESM-2), and clinical outcomes into a unified knowledge graph. The model predicts novel drug-target interactions and therapeutic indications through contrastive graph learning.
 
+**🚀 [Try the Interactive Demo](https://huggingface.co/spaces/YOUR_USERNAME/pharmacology-graph)** | **📖 [Full Setup Guide](SETUP.md)** | **🎓 [Research Notebook](code.ipynb)**
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/JoeVonDahab/pharmacology-graph.git
+cd pharmacology-graph
+
+# 2. Install dependencies
+pip install -r requirements_app.txt
+
+# 3. Run the interactive app
+./start_app.sh
+# Open http://localhost:7860 in your browser
+```
+
+**Requirements**: Python 3.9+, 8GB RAM, 10MB disk space (app only)
+
+For complete setup instructions and troubleshooting, see **[SETUP.md](SETUP.md)**.
+
 ---
 
 ## 🎯 Project Overview
