@@ -446,7 +446,7 @@ with gr.Blocks(title="Pharmacology Knowledge Graph Explorer", theme=gr.themes.So
         Explore drug-target-effect relationships using AI-powered predictions from a TransE knowledge graph model.
         
         **Features:**
-        - 🔍 Search 800+ approved drugs
+        - 🔍 Search **2,526** FDA-approved drugs
         - 🎯 View known and predicted protein targets
         - 💉 Discover potential therapeutic uses (drug repurposing)
         - 🕸️ Interactive network visualization
