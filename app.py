@@ -529,14 +529,18 @@ with gr.Blocks(title="Pharmacology Knowledge Graph Explorer", theme=gr.themes.So
         ### 📊 About the Model
         
         This app uses a **TransE knowledge graph embedding model** trained on:
-        - 800+ FDA-approved drugs
-        - 200+ human protein targets (with ESM-2 embeddings)
-        - 400+ clinical effects and indications
+        - **2,526** FDA-approved drugs
+        - **1,156** human protein targets (with ESM-2 embeddings)
+        - **1,065** clinical indications
+        - **18,789** total known links
         
         **Prediction method:** Cosine similarity in learned embedding space  
         **Model performance:** ~90% precision on top-50 predictions
         
-        **Citation:** VonDahab, J. (2025). Pharmacology Knowledge Graph. [GitHub](https://github.com/JoeVonDahab/pharmacology-graph)
+        **By:** Youssef Abo-Dahab, Pharm.D.  
+        **AICD3 M.S. Candidate, UCSF** | October 2025
+        
+        [GitHub Repository](https://github.com/JoeVonDahab/pharmacology-graph)
         
         ---
         **Disclaimer:** This is a research tool for exploratory analysis only. Predictions should be validated experimentally. Not for clinical use.
