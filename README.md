@@ -1,8 +1,20 @@
+---
+title: Pharmacology Knowledge Graph
+emoji: 💊
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: 4.44.1
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # Pharmacology Knowledge Graph: Drug-Target-Effect Prediction
 
 A novel machine learning system that learns **pharmacology-aligned embeddings** by integrating chemical structures (SMILES), protein sequences (ESM-2), and clinical outcomes into a unified knowledge graph. The model predicts novel drug-target interactions and therapeutic indications through contrastive graph learning.
 
-**🚀 [Try the Interactive Demo](https://huggingface.co/spaces/YOUR_USERNAME/pharmacology-graph)** | **📖 [Full Setup Guide](SETUP.md)** | **🎓 [Research Notebook](code.ipynb)**
+**🚀 [Try the Interactive Demo](https://huggingface.co/spaces/JoeVonDahab/pharmacology-graph)** | **📖 [Full Setup Guide](SETUP.md)** | **🎓 [Research Notebook](code.ipynb)**
 
 ---
 
