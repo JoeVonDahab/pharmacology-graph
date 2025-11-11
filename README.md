@@ -1,9 +1,9 @@
 # Pharmacology Knowledge Graph: Drug-Target-Effect Prediction
 
-- **CS224W: Machine Learning with Graphs - Final Project, Fall 2025**  
+- **CS224W**: Machine Learning with Graphs - Final Project, Fall 2025.  
 - **Students:** Youssef Abo-Dahab, Ruby Hernandez, Ismael Caleb Arechiga Duran.
 - **Teaching Staff**: Jure Leskovec, Charilaos Kanatsoulis, Ayush Agrawal.
-- **Affiliation**: **Stanford University, Computer Science Department**. 
+- **Affiliation**: Stanford University, Computer Science Department. 
 
   Heterogeneous graph neural network for predicting drug-target interactions and therapeutic effects. Built from ChEMBL data with 3,127 drugs, 1,156 proteins, and 1,065 effects.
 
