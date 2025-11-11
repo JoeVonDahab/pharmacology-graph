@@ -148,7 +148,7 @@ MLP Link Predictors → Drug-Protein & Drug-Effect scores
 ```python
 batch_size = 4 proteins
 total_proteins = 1,156
-compute_time = ~1 hour (RTX GeForce 3090)
+# compute_time = ~1 hour (RTX GeForce 3090)
 ```
 
 #### **3. Effect Features (Learnable)**
