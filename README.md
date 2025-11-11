@@ -9,6 +9,7 @@ app_file: app.py
 pinned: false
 license: mit
 ---
+- https://www.mediafire.com/file/i33yodulcc44q9g/protein_nodes_with_embeddings_v4.pkl/file
 
 # Pharmacology Knowledge Graph: Drug-Target-Effect Prediction
 
