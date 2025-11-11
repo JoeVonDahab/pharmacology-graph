@@ -704,9 +704,9 @@ MIT License - see LICENSE file for details
 
 ## 📧 Contact
 
-**Author:** Youssef Abo-Dahab  
+**Author:** Youssef Abo-Dahab, Ruby Hernandez, Ismael Caleb Arechiga Duran 
 **Email:** abodahab@stanford.edu  
-**Course:** CS224W: Machine Learning with Graphs (Fall 2024)  
+**Course:** CS224W: Machine Learning with Graphs (Fall 2025)  
 **Repository:** [github.com/JoeVonDahab/pharmacology-graph](https://github.com/JoeVonDahab/pharmacology-graph)
 
 For questions or collaboration: [create an issue](https://github.com/JoeVonDahab/pharmacology-graph/issues)

@@ -1,7 +1,0 @@
-Metric,Drug-Protein,Drug-Effect
-AUC-ROC,0.9187,0.9347
-AUC-PR,0.9172,0.9472
-Accuracy,0.8268,0.8089
-Precision,0.9077,0.9785
-Recall,0.7276,0.6317
-F1-Score,0.8077,0.7678
