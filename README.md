@@ -53,6 +53,7 @@ GraphSAGE (3 layers, mean aggregation)
 MLP Link Predictors → Drug-Protein & Drug-Effect scores
 ```
 - Optimizer: SGD (lr=0.001)
+- Training: 20 Minutes
 
 ### Model V2: Attention-Enhanced (888M params)
 ```
@@ -67,7 +68,7 @@ Attention-based Hetero Conv (3 layers, 4 heads)
 MLP Link Predictors → Drug-Protein & Drug-Effect scores
 ```
 - Optimizer: AdamW (lr=1e-3, weight_decay=1e-5)
-- Training: 45 min (NVIDIA GPU, 16GB+)
+- Training: 130 Minutes
 
 ---
 
