@@ -437,8 +437,5 @@ pharmacology-graph/
 ## 📧 Contact
 
 **Authors:** Youssef Abo-Dahab, Ruby Hernandez, Ismael Caleb Arechiga Duran  
-**Email:** abodahab@stanford.edu  
-**Course:** CS224W: Machine Learning with Graphs (Fall 2024)  
+**Email:** abodahab@stanford.edu, iaredur@stanford.edu, rubyh@stanford.edu  
 **Repository:** [github.com/JoeVonDahab/pharmacology-graph](https://github.com/JoeVonDahab/pharmacology-graph)
-
-For questions or collaboration: [create an issue](https://github.com/JoeVonDahab/pharmacology-graph/issues)
