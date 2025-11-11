@@ -1,8 +1,8 @@
 # Pharmacology Knowledge Graph: Drug-Target-Effect Prediction
 
-**CS224W: Machine Learning with Graphs - Final Project**  
+**CS224W: Machine Learning with Graphs - Final Project, Fall 2025**  
 **Students:** Youssef Abo-Dahab, Ruby Hernandez, Ismael Caleb Arechiga Duran  
-**Fall 2025**
+**Teaching Staff: Jure Leskovec, Charilaos Kanatsoulis, Ayush Agrawal 
 
 Heterogeneous graph neural network for predicting drug-target interactions and therapeutic effects. Built from ChEMBL data with 3,127 drugs, 1,156 proteins, and 1,065 effects.
 
@@ -93,18 +93,7 @@ MLP Link Predictors → Drug-Protein & Drug-Effect scores
 
 ---
 
-## 🚀 Usage
-
-**Choose Model V2** (88.2% AUC) for production - requires 16GB+ GPU  
-**Choose Model V1** (69.2% AUC) for baselines/education - works on 8GB GPU
-
-**Notebooks:**
-- Model V1: [`code copy.ipynb`](code%20copy.ipynb)
-- Model V2: [`800 million parmaters model.ipynb`](800%20million%20parmaters%20model.ipynb)
-
-
 **Data:** ChEMBL 36 database (place in `chembl_36/chembl_36_sqlite/chembl_36.db`)
-
 ---
 
 ## � References
@@ -115,16 +104,6 @@ MLP Link Predictors → Drug-Protein & Drug-Effect scores
 - **GraphSAGE:** Hamilton et al., "Inductive Representation Learning on Large Graphs" (NeurIPS 2017)
 - **ESM-2:** Lin et al., "Evolutionary-scale prediction of atomic-level protein structure" (Science 2023)
 - **ChEMBL:** Gaulton et al., "The ChEMBL database in 2017" (Nucleic Acids Research 2017)
-
----
-
-## 📧 Contact
-
-**Authors:** Youssef Abo-Dahab, Ruby Hernandez, Ismael Caleb Arechiga Duran  
-**Email:** abodahab@stanford.edu  
-**Course:** CS224W: Machine Learning with Graphs (Fall 2025)  
-**Repository:** [github.com/JoeVonDahab/pharmacology-graph](https://github.com/JoeVonDahab/pharmacology-graph)
-
 
 ---
 
@@ -180,18 +159,6 @@ compute_time = ~1 hour (RTX GeForce 3090)
 
 ### Training Procedure
 
-#### **Data Splits (No Leakage)**
-
-```python
-# Edge-level splitting (transductive setting)
-train_edges = 80%  # Used for GNN message passing
-val_edges = 10%    # Held out for hyperparameter tuning
-test_edges = 10%   # Final evaluation only
-
-# Critical: Message passing uses ONLY training edges
-# Validation/test edges are predicted but not used for aggregation
-```
-
 #### **Loss Function**
 
 **Binary Cross-Entropy with Negative Sampling:**
@@ -213,8 +180,8 @@ For each batch:
 optimizer = Manual SGD
 learning_rate = 0.001
 batch_size = 256 drugs
-epochs = 100 (with early stopping)
-early_stopping_patience = 10 epochs
+epochs = 300 (with early stopping)
+early_stopping_patience = 80 epochs
 ```
 
 **Gradient Update:**
@@ -232,7 +199,7 @@ for param in model.parameters():
 - **Type-specific encoders:** GAT for molecular graphs, MLP for embeddings
 
 #### **2. Why GAT for Drugs?**
-- **Attention mechanism:** Learn importance of atoms/bonds
+- **Attention mechanism:** Learn the importance of atoms/bonds
 - **Permutation invariant:** Order of atoms doesn't matter
 - **Variable graphs:** Handle molecules of different sizes
 
@@ -244,7 +211,8 @@ for param in model.parameters():
 #### **4. Why Bidirectional Edges?**
 - **Information flow:** Drugs ↔ Proteins ↔ Effects
 - **Richer embeddings:** Nodes learn from multiple hops
-- **Symmetry:** Both endpoints benefit from relationship
+- **Nodes that are connected are different types --> no need for directionality**
+- **Symmetry:** Both endpoints benefit from the relationship
 
 ---
 
@@ -252,7 +220,7 @@ for param in model.parameters():
 
 ### Problem Formulation (CS224W Framework)
 
-**Task:** Link prediction in heterogeneous knowledge graph
+**Task:** Link prediction in a heterogeneous knowledge graph
 
 **Input:**
 - Graph: G = (V, E) where V = V_drug ∪ V_protein ∪ V_effect
@@ -290,75 +258,6 @@ negative_sample = (drug_i, random_target_k)
 # - Same drug, different target (hard negatives)
 # - Balanced classes (1:1 ratio)
 # - Realistic evaluation
-```
-
-#### **3. Metrics**
-
-**Primary Metrics:**
-- **AUC-ROC:** Area under receiver operating characteristic curve
-- **Average Precision:** Area under precision-recall curve
-
-**Secondary Metrics:**
-- **Precision@0.5:** Fraction of predictions >0.5 that are correct
-- **Recall@0.5:** Fraction of true edges with score >0.5
-- **F1-Score:** Harmonic mean of precision and recall
-
-### Cross-Validation Strategy
-
-**Validation Set Usage:**
-- Monitor training progress (every epoch)
-- Early stopping (patience = 10 epochs)
-- Hyperparameter selection (learning rate, hidden dims, num layers)
-
-**Test Set Usage:**
-- Single evaluation after training completes
-- Load best model (highest validation AUC)
-- Report final performance
-
-### Reproducibility
-
-**Random Seeds:**
-```python
-torch.manual_seed(42)
-np.random.seed(42)
-random.seed(42)
-```
-## 📈 Use Cases
-
-### 1. **Drug Repurposing**
-
-Find new therapeutic uses for approved drugs:
-
-```python
-# Example: Query novel indications for Aspirin
-drug_smiles = "CC(=O)Oc1ccccc1C(=O)O"  # Aspirin
-predictions = predict_new_drug_embedding(drug_smiles, top_k=10)
-
-# Output: Predicted new effects beyond pain/inflammation
-# - Cardiovascular prevention (known)
-# - Colorectal cancer prevention (emerging evidence)
-```
-
-### 2. **Target Identification**
-
-Predict protein targets for experimental compounds:
-
-```python
-# Novel kinase inhibitor candidate
-novel_smiles = "Cc1ccc(Nc2nccc(...)...)cc1"
-targets = predict_protein_targets(novel_smiles, top_k=20)
-
-# Helps prioritize biochemical assays
-```
-
-### 3. **Off-target Prediction**
-
-Identify safety liabilities early:
-
-```python
-# Check for unintended receptor binding
-all_targets = predict_all_targets(drug_smiles, threshold=0.45)
-safety_flags = [t for t in all_targets if t in ['hERG', 'CYP3A4', 'Opioid']]
 ```
 
 ---
@@ -419,7 +318,7 @@ pharmacology-graph/
 ### Key Files
 
 **Notebooks (Model Training):**
-- `code copy.ipynb` - **Model V1**: GraphSAGE baseline (recommended for learning)
+- `3 million paramaters model.ipynb ` - **Model V1**: GraphSAGE baseline (recommended for learning)
 - `800 million parmaters model.ipynb` - **Model V2**: Attention-enhanced (state-of-the-art)
 
 **Model Weights:**
