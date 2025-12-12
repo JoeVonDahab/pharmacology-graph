@@ -31,7 +31,7 @@
 **📊 Three Models:**
 - **Model V1** (3.4M params): GraphSAGE baseline → **69.2% AUC**
 - **Model V2** (888M params): NNConv + Attention + Contrastive → **88.2% AUC** 🏆
-- **TransR** (Knowledge Embeddings): Pure embedding lookup with relation-specific projections
+- **TransR** (Knowledge Embeddings): Pure embedding lookup with relation-specific projections  **89.6% AUC** �
 
 **📓 Notebooks:** [Model V1](code%20copy.ipynb) | [Model V2](800%20million%20parmaters%20model.ipynb) | [TransR](pure_knowledge_embeddings.ipynb)
 
