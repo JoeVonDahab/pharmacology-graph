@@ -5,6 +5,9 @@
 - **Teaching Staff**: Jure Leskovec, Charilaos Kanatsoulis, Ayush Agrawal.
 - **Affiliation**: Stanford University, Computer Science Department. 
 
+![Uploading Gemini_Generated_Image_i07ytbi07ytbi07y.png…]()
+
+
 > **📦 TransR Model Data Package**  
 > To run the TransR knowledge embedding model (`pure_knowledge_embeddings.ipynb`), download the required data package (~2.8GB) from:  
 > **[📥 Download TransR Full Data](https://drive.google.com/file/d/1cDcCLBwwPVpEtgfracVmW1UkLqxaqC2M/view?usp=sharing)**  
