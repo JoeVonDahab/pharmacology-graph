@@ -31,7 +31,7 @@
 **📊 Three Models:**
 - **Model V1** (3.4M params): GraphSAGE baseline → **69.2% AUC**
 - **Model V2** (888M params): NNConv + Attention + Contrastive → **88.2% AUC** 🏆
-- **TransR** (Knowledge Embeddings): Pure embedding lookup with relation-specific projections  **89.6% AUC** �
+- **TransR** (Knowledge Embeddings): Pure embedding lookup with relation-specific projections  **89.6% AUC** 🏆
 
 **📓 Notebooks:** [Model V1](code%20copy.ipynb) | [Model V2](800%20million%20parmaters%20model.ipynb) | [TransR](pure_knowledge_embeddings.ipynb)
 
@@ -43,8 +43,8 @@
 | **Architecture** | GAT + GraphSAGE | NNConv + Attention + Contrastive | Embedding Lookup + Relation Projections |
 | **Test AUC** | 69.2% | **88.2%** | 89.6% 🏆 |
 | **Precision** | 60.7% | **86.8%** | 78.9% |
-| **Training Time** | 20 min | 130 min | 5-10 min 🏆 |
-| **GPU Memory** | 24GB | 96GB | ~1GB 🏆 |
+| **Training Time** | 20 min 🏆  | 130 min | 5hr |
+| **GPU Memory USED** | ~24GB | ~96GB |  ~12GB 🏆 |
 
 ### TransR Model Details
 - **Approach:** Pure knowledge graph embeddings without complex feature encoders
