@@ -41,9 +41,9 @@
 |---------|---------------------|---------------------|---------------------|
 | **Parameters** | 3.4M | 888M | 246M |
 | **Architecture** | GAT + GraphSAGE | NNConv + Attention + Contrastive | Embedding Lookup + Relation Projections |
-| **Test AUC** | 69.2% | **88.2%** | 89.6% 🏆 |
-| **Precision** | 60.7% | **86.8%** | 78.9% |
-| **Training Time** | 20 min 🏆  | 130 min | 5hr |
+| **Test AUC** | 69.2% | 88.2% | **89.6%** 🏆 |
+| **Precision** | 60.7% | **86.8%** 🏆 | 78.9% |
+| **Training Time** | **20 min** 🏆  | 130 min | 5hr |
 | **GPU Memory USED** | ~24GB | ~96GB |  ~12GB 🏆 |
 
 ### TransR Model Details
