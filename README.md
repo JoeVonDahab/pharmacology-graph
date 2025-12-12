@@ -309,12 +309,13 @@ negative_sample = (drug_i, random_target_k)
 
 ```bibtex
 @misc{abodahab2025pharmacology,
-  author = {Abo-Dahab, Youssef},
-  title = {Heterogeneous Graph Neural Networks for Pharmacology Link Prediction},
-  year = {2024},
-  institutions = {Stanford University, UCSF},
-  course = {CS224W: Machine Learning with Graphs},
-  url = {https://github.com/JoeVonDahab/pharmacology-graph}
+  author       = {Abo-Dahab, Youssef and Hernandez, Ruby and Arechiga Duran, Ismael Caleb},
+  title        = {Heterogeneous Graph Neural Networks for Pharmacology Link Prediction},
+  year         = {2024},
+  institution  = {Stanford University and University of California, San Francisco},
+  course       = {CS224W: Machine Learning with Graphs},
+  url          = {https://github.com/JoeVonDahab/pharmacology-graph},
+  note         = {Authors' emails: abodahab@stanford.edu; rubyh@stanford.edu; iaredur@stanford.edu}
 }
 ```
 
