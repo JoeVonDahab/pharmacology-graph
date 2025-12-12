@@ -5,24 +5,65 @@
 - **Teaching Staff**: Jure Leskovec, Charilaos Kanatsoulis, Ayush Agrawal.
 - **Affiliation**: Stanford University, Computer Science Department. 
 
+> **📦 TransR Model Data Package**  
+> To run the TransR knowledge embedding model (`pure_knowledge_embeddings.ipynb`), download the required data package (~2GB) from:  
+> **[📥 Download TransR Full Data](https://drive.google.com/file/d/1cDcCLBwwPVpEtgfracVmW1UkLqxaqC2M/view?usp=sharing)**  
+>  
+> The ZIP contains all pickle data files and trained model weights:  
+> - `approved_small_molecule_drugs.pkl` - Drug metadata
+> - `drug_clinical_effects.pkl` - Drug-effect relationships
+> - `drug_mechanism_of_action.pkl` - Mechanism of action data
+> - `drug_protein_interactions.pkl` - Drug-protein binding data
+> - `drug_therapeutic_classes_atc.pkl` - ATC therapeutic classifications
+> - `drug_warnings_adverse_effects.pkl` - Safety/warning information
+> - `transr_full_model.pt` - Full trained TransR model
+> - `transr_knowledge_embeddings_best.pt` - Best checkpoint
+> - `transr_entity_embeddings.npz` - Extracted entity embeddings
+> - `transr_relation_data.npz` - Relation embeddings and projection matrices
+> - Visualization outputs (`.png` files)
+>  
+> Extract contents to the `transR/` directory before running the notebook.
+
+---
+
   Heterogeneous graph neural network for predicting drug-target interactions and therapeutic effects. Built from ChEMBL data with 3,127 drugs, 1,156 proteins, and 1,065 effects.
 
-**📊 Two Models:**
+**📊 Three Models:**
 - **Model V1** (3.4M params): GraphSAGE baseline → **69.2% AUC**
 - **Model V2** (888M params): NNConv + Attention + Contrastive → **88.2% AUC** 🏆
+- **TransR** (Knowledge Embeddings): Pure embedding lookup with relation-specific projections
 
-**� Notebooks:** [Model V1](code%20copy.ipynb) | [Model V2](800%20million%20parmaters%20model.ipynb)
+**📓 Notebooks:** [Model V1](code%20copy.ipynb) | [Model V2](800%20million%20parmaters%20model.ipynb) | [TransR](pure_knowledge_embeddings.ipynb)
 
 ## 📊 Model Comparison
 
-| Feature | Model V1 (GraphSAGE) | Model V2 (Attention) |
-|---------|---------------------|---------------------|
-| **Parameters** | 3.4M | 888M |
-| **Architecture** | GAT + GraphSAGE | NNConv + Attention + Contrastive |
-| **Test AUC** | 69.2% | **88.2%** 🏆 |
-| **Precision** | 60.7% | **86.8%** 🏆 |
-| **Training Time** | 20 min 🏆 | 130 min |
-| **GPU Memory** | 24GB 🏆 | 96GB |
+| Feature | Model V1 (GraphSAGE) | Model V2 (Attention) | TransR (Embeddings) |
+|---------|---------------------|---------------------|---------------------|
+| **Parameters** | 3.4M | 888M | 246M |
+| **Architecture** | GAT + GraphSAGE | NNConv + Attention + Contrastive | Embedding Lookup + Relation Projections |
+| **Test AUC** | 69.2% | **88.2%** | 89.6% 🏆 |
+| **Precision** | 60.7% | **86.8%** | 78.9% |
+| **Training Time** | 20 min | 130 min | 5-10 min 🏆 |
+| **GPU Memory** | 24GB | 96GB | ~1GB 🏆 |
+
+### TransR Model Details
+- **Approach:** Pure knowledge graph embeddings without complex feature encoders
+- **Scoring:** $\text{Score}(h,r,t) = -\|\mathbf{M}_r \mathbf{h} + \mathbf{r} - \mathbf{M}_r \mathbf{t}\|_2$
+- **Entity Types:** Drugs (1.9M), Proteins (4,040), Effects (2,178), Targets (1,518), Warnings (462), Therapeutics (666)
+- **Total Entities:** 1,924,278
+- **Relation Types:** drug_binds_protein, drug_causes_effect, drug_acts_on_target, drug_has_warning, drug_has_therapeutic
+- **Dimensions:** Entity=128, Relation=64
+- **Total Parameters:** 246,348,864 (~985 MB)
+- **Loss:** Margin-based ranking with negative sampling (margin=1.0)
+
+**Classification Metrics:**
+| Metric | Value |
+|--------|-------|
+| **AUC-ROC** | 0.8961 |
+| **Accuracy** | 0.8157 |
+| **Precision** | 0.7889 |
+| **Recall** | 0.8620 |
+| **F1 Score** | 0.8239 |
 
 ---
 
@@ -277,7 +318,7 @@ negative_sample = (drug_i, random_target_k)
 }
 ```
 
-## � Repository Structure
+## 📁 Repository Structure
 
 ```
 pharmacology-graph/
@@ -292,6 +333,21 @@ pharmacology-graph/
 ├── 800 million parmaters model.ipynb           # Model V2 (Attention, 888M params)
 ├── 3 million paramaters model.ipynb            # Early experiments
 ├── old_model_transE_and_data.ipynb            # TransE baseline (archived)
+│
+├── transR/                                      # TransR Knowledge Embeddings
+│   ├── pure_knowledge_embeddings.ipynb         # TransR model notebook
+│   └── TransR Full Data/                       # ⚠️ Download from Google Drive (see note above)
+│       ├── approved_small_molecule_drugs.pkl   # Drug metadata
+│       ├── drug_clinical_effects.pkl           # Drug-effect relationships
+│       ├── drug_mechanism_of_action.pkl        # MOA data
+│       ├── drug_protein_interactions.pkl       # Drug-protein bindings
+│       ├── drug_therapeutic_classes_atc.pkl    # ATC classifications
+│       ├── drug_warnings_adverse_effects.pkl   # Safety data
+│       ├── transr_full_model.pt                # Trained model weights
+│       ├── transr_knowledge_embeddings_best.pt # Best checkpoint
+│       ├── transr_entity_embeddings.npz        # Entity embeddings
+│       ├── transr_relation_data.npz            # Relation data
+│       └── *.png                               # Visualization outputs
 │
 ├── best_model_clean.pt                          # Trained Model V1 weights
 ├── best_model_improved.pt                       # Trained Model V2 weights (if generated)
@@ -320,18 +376,21 @@ pharmacology-graph/
 ### Key Files
 
 **Notebooks (Model Training):**
-- `3 million paramaters model.ipynb ` - **Model V1**: GraphSAGE baseline (recommended for learning)
+- `code copy.ipynb` - **Model V1**: GraphSAGE baseline (recommended for learning)
 - `800 million parmaters model.ipynb` - **Model V2**: Attention-enhanced (state-of-the-art)
+- `transR/pure_knowledge_embeddings.ipynb` - **TransR**: Pure knowledge embeddings (lightweight)
 
 **Model Weights:**
 - `best_model_clean.pt` - Trained Model V1 (69.2% AUC)
 - `best_model_improved.pt` - Trained Model V2 (88.2% AUC)
+- `transR/transr_full_model.pt` - Trained TransR model ([download from Google Drive](https://drive.google.com/file/d/1cDcCLBwwPVpEtgfracVmW1UkLqxaqC2M/view?usp=sharing))
 
 **Data Files:**
 - `drug_nodes.csv` - Drug metadata from ChEMBL
 - `drug_effects.csv` - Drug-indication relationships
 - `drugs_interactions.csv` - Known drug-target interactions
 - `protein_nodes_with_embeddings_v4.pkl` - Protein sequences + ESM-2 embeddings (2.8GB)
+- `transR/*.pkl` - TransR pickle data files ([download from Google Drive](https://drive.google.com/file/d/1cDcCLBwwPVpEtgfracVmW1UkLqxaqC2M/view?usp=sharing))
 
 ---
 
