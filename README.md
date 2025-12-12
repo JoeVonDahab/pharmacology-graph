@@ -44,7 +44,7 @@
 | **Test AUC** | 69.2% | 88.2% | **89.6%** 🏆 |
 | **Precision** | 60.7% | **86.8%** 🏆 | 78.9% |
 | **Training Time** | **20 min** 🏆  | 130 min | 5hr |
-| **GPU Memory USED** | ~24GB | ~96GB |  ~12GB 🏆 |
+| **GPU Memory** | **24GB** 🏆 | ~96GB |  96GB |
 
 ### TransR Model Details
 - **Approach:** Pure knowledge graph embeddings without complex feature encoders
