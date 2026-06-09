@@ -1,0 +1,1 @@
+{"num_drugs": 3127, "num_proteins": 1156, "num_indications": 1065, "top_k": 50, "model": "Ablation-2 (No Drug Graphs)", "params": 3306242}

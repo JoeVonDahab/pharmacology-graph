@@ -65,3 +65,21 @@ ENV/
 *.swp
 *.swo
 *~
+
+# ---- production webapp + docs (re-allow web assets and prediction data) ----
+# These must be tracked so the static GitHub Pages site can be deployed.
+!*.html
+!*.css
+!*.js
+!*.json
+!*.md
+!*.txt
+!*.toml
+!*.lock
+!*.yml
+!*.yaml
+
+# Still keep large/regenerable training artifacts out of git
+production/artifacts/
+production/**/__pycache__/
+production/*.log

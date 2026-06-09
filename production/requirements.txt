@@ -1,0 +1,6 @@
+# Production reconstruction of the Ablation-2 ("No Drug Graphs") model.
+# Pure PyTorch — no torch_geometric, no rdkit required.
+torch>=2.1
+numpy>=1.24,<2.0
+pandas>=2.0
+scikit-learn>=1.3
