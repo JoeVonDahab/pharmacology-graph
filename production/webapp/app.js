@@ -1,6 +1,6 @@
 'use strict';
 
-const V = 'p2';                       // bump on each data/app redeploy to bust caches
+const V = 'p3';                       // bump on each data/app redeploy to bust caches
 const DATA = 'data';
 const bust = u => `${u}${u.includes('?') ? '&' : '?'}v=${V}`;
 const CHEMBL_CMP = id => `https://www.ebi.ac.uk/chembl/explore/compound/${id}`;
