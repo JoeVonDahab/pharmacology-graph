@@ -76,7 +76,7 @@ def _topk_rows(scores, known_by_row, k, id_lookup, name_lookup):
     return results
 
 
-def generate(top_k: int = 50, device: str | None = None):
+def generate(top_k: int = 100, device: str | None = None):
     device = device or ("cuda" if torch.cuda.is_available() else "cpu")
     ckpt = torch.load(ARTIFACTS / "ablation2_paper_best.pt", map_location=device, weights_only=False)
     data = load_paper_data()
