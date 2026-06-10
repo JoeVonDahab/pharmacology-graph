@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pharmacology Graph — Drug · Disease · Target Explorer</title>
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;💊&lt;/text&gt;&lt;/svg&gt;" />
+<link rel="stylesheet" href="style.css?v=p2" />
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <h1>💊 Pharmacology Graph Explorer</h1>
+    <p class="tagline">
+      Search a <span class="chip drug">Drug</span> to see its predicted targets &amp; indications, or a
+      <span class="chip ind">Indication</span> / <span class="chip prot">Protein</span> to see the drugs most likely
+      linked to it — each flagged <span class="badge known">known</span> or <span class="badge novel">novel</span>.
+    </p>
+    <p class="meta-line" id="meta-line"></p>
+    <p class="meta-line" id="metrics-note"></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="search-box">
+    <label for="search" class="sr-only">Search</label>
+    <input id="search" type="text" autocomplete="off" spellcheck="false"
+           placeholder="Search a drug, disease/indication, or protein (e.g. sunitinib, breast neoplasms, CHEMBL231)…" />
+    <ul id="suggestions" class="suggestions" hidden></ul>
+  </section>
+
+  <section id="empty-state" class="empty">
+    <p>Start typing above. <span class="hint">Drugs · Indications · Proteins — all searchable, both directions.</span></p>
+    <div class="examples" id="examples"></div>
+  </section>
+
+  <section id="result" class="result" hidden>
+    <div class="drug-head">
+      <div>
+        <span class="chip" id="type-chip"></span>
+        <h2 id="drug-name"></h2>
+        <a id="drug-link" class="ext" target="_blank" rel="noopener"></a>
+      </div>
+      <div class="stat-cards" id="stat-cards"></div>
+    </div>
+
+    <div class="controls">
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="filters">
+        <div class="chips" id="status-filter">
+          <button class="chip active" data-status="all">All</button>
+          <button class="chip" data-status="novel">Novel only</button>
+          <button class="chip" data-status="known">Known only</button>
+        </div>
+        <input id="table-filter" class="table-filter" type="text" placeholder="Filter rows…" />
+        <div class="downloads">
+          <button id="dl-csv" class="dl">⬇ CSV</button>
+          <button id="dl-json" class="dl">⬇ JSON</button>
+        </div>
+      </div>
+    </div>
+
+    <table class="pred-table">
+      <thead>
+        <tr><th class="c-rank">#</th><th id="th-target">Target</th><th>ID</th><th class="c-score">Score</th><th class="c-status">Status</th></tr>
+      </thead>
+      <tbody id="pred-body"></tbody>
+    </table>
+    <p id="no-rows" class="no-rows" hidden>No rows match the current filter.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      Predictions are model outputs for research exploration only — not clinical or experimental validation.
+      Score is the model's relative confidence within each ranking (1.0 = top). Download full tables:
+      <a href="data/predictions_drug_protein.csv" download>drug–protein CSV</a> ·
+      <a href="data/predictions_drug_indication.csv" download>drug–indication CSV</a>.
+    </p>
+    <p class="src">Model: Ablation 2 “No Drug Graphs” (~3.29M params), faithfully reconstructed from
+      <a href="https://arxiv.org/abs/2603.01537" target="_blank" rel="noopener">arXiv:2603.01537</a> —
+      learnable drug embeddings + ESM-2 proteins + heterogeneous GraphSAGE message passing.</p>
+  </div>
+</footer>
+
+<script src="app.js?v=p2"></script>
+</body>
+</html>

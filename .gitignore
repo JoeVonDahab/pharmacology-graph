@@ -1,0 +1,6 @@
+production/artifacts/
+__pycache__/
+*.pyc
+*.pt
+*.npz
+*.log
