@@ -76,7 +76,12 @@ def _topk_rows(scores, known_by_row, k, id_lookup, name_lookup):
     return results
 
 
-def generate(top_k: int = 100, device: str | None = None):
+# bulk "download-all" CSVs are capped to stay under GitHub's 100 MB/file limit;
+# per-entity JSON and client-side download still give the full top_k.
+CSV_CAP = 100
+
+
+def generate(top_k: int = 500, device: str | None = None):
     device = device or ("cuda" if torch.cuda.is_available() else "cpu")
     ckpt = torch.load(ARTIFACTS / "ablation2_paper_best.pt", map_location=device, weights_only=False)
     data = load_paper_data()
@@ -160,9 +165,9 @@ def generate(top_k: int = 100, device: str | None = None):
         (pred_dir / f"{cid}.json").write_text(json.dumps({
             "drug": {"id": cid, "name": drug_names[di_]},
             "proteins": proteins, "indications": indications}))
-        for r in proteins:
+        for r in proteins[:CSV_CAP]:
             pw.writerow([cid, drug_names[di_], r["rank"], r["id"], r["name"], r["score"], r["raw"], r["status"]])
-        for r in indications:
+        for r in indications[:CSV_CAP]:
             iw.writerow([cid, drug_names[di_], r["rank"], r["id"], r["name"], r["score"], r["raw"], r["status"]])
         drugs_index.append({"id": cid, "name": drug_names[di_],
                             "kp": len(kp_by_drug.get(di_, ())), "np": sum(1 for r in proteins if r["status"] == "novel"),
