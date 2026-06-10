@@ -82,5 +82,17 @@ h1{margin:0 0 6px;font-size:26px}
 .badge.novel{color:var(--novel);background:var(--novel-bg)}
 .no-rows{color:var(--muted);text-align:center;padding:24px}
 
+/* entity-type chips */
+.chip.drug,.chip.ind,.chip.prot{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.03em;border:0;cursor:default;vertical-align:middle}
+.chip.drug{color:#7fb2ff;background:rgba(91,140,255,.16)}
+.chip.ind{color:#e08bd0;background:rgba(224,139,208,.16)}
+.chip.prot{color:#6fd3c0;background:rgba(63,178,178,.16)}
+.tagline .chip{margin:0 1px}
+#type-chip{margin-bottom:6px;display:inline-block}
+.suggestions .s-left{display:flex;align-items:center;gap:8px;min-width:0}
+.suggestions .sname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.examples button{display:inline-flex;align-items:center;gap:7px}
+
 .site-footer{margin-top:50px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:13px}
 .site-footer .src{margin-top:6px;font-size:12px;opacity:.75}
