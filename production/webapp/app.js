@@ -1,6 +1,8 @@
 'use strict';
 
+const V = 'p2';                       // bump on each data/app redeploy to bust caches
 const DATA = 'data';
+const bust = u => `${u}${u.includes('?') ? '&' : '?'}v=${V}`;
 const CHEMBL_CMP = id => `https://www.ebi.ac.uk/chembl/explore/compound/${id}`;
 const CHEMBL_TGT = id => `https://www.ebi.ac.uk/chembl/explore/target/${id}`;
 const MESH = id => `https://meshb.nlm.nih.gov/record/ui?ui=${id}`;
@@ -24,10 +26,10 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 async function init() {
   try {
     const [drugs, inds, prots, meta] = await Promise.all([
-      fetch(`${DATA}/drugs.json`).then(r => r.json()),
-      fetch(`${DATA}/indications.json`).then(r => r.json()),
-      fetch(`${DATA}/proteins.json`).then(r => r.json()),
-      fetch(`${DATA}/meta.json`).then(r => r.json()).catch(() => null),
+      fetch(bust(`${DATA}/drugs.json`)).then(r => r.json()),
+      fetch(bust(`${DATA}/indications.json`)).then(r => r.json()),
+      fetch(bust(`${DATA}/proteins.json`)).then(r => r.json()),
+      fetch(bust(`${DATA}/meta.json`)).then(r => r.json()).catch(() => null),
     ]);
     ENTITIES = [
       ...drugs.map(d => ({ ...d, type: 'drug' })),
@@ -117,7 +119,7 @@ async function select(type, id) {
   $('#suggestions').hidden = true; $('#search').value = '';
   let data;
   try {
-    data = await fetch(`${DATA}/${TYPES[type].file(id)}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    data = await fetch(bust(`${DATA}/${TYPES[type].file(id)}`)).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
   } catch (e) { alert(`No predictions found for ${type} "${id}".`); return; }
 
   let view, head;
